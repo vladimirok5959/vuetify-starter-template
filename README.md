@@ -39,4 +39,4 @@ yarn lint
 
 ### Customize configuration
 
-See [Configuration Reference](https://vitejs.dev/config/).
+See [Configuration Reference](https://vitejs.dev/config/)
