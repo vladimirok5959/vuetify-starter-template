@@ -10,7 +10,9 @@
     <v-list-item
       v-for="[icon, text, href] in links"
       :key="icon"
+      active-class="active"
       @click="onItemClick(href)"
+      :class="href === $route.path ? 'active' : ''"
     >
       <template v-slot:prepend>
         <v-icon>{{ icon }}</v-icon>
@@ -20,9 +22,13 @@
   </v-list>
 </template>
 
-<style scoped>
+<style>
   #sidebarUser {
     box-shadow: 0px 2px 4px -1px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 4px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 10px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12))
+  }
+  .v-list-item.active .v-list-item__overlay {
+    background: currentColor;
+    opacity: 0.1;
   }
 </style>
 
