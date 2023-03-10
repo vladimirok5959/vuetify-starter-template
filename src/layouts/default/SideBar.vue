@@ -5,18 +5,19 @@
       subtitle="sandra@gmail.com"
     ></v-list-item>
   </v-list>
-  <v-list>
+  <v-list density="compact">
+    <v-list-subheader>DASHBOARD</v-list-subheader>
     <v-list-item
       v-for="[icon, text, href] in links"
       :key="icon"
-      active-class="active"
+      active-class="v-list-item--active text-primary"
       @click="onItemClick(href)"
-      :class="href === $route.path ? 'active' : ''"
+      :class="href === $route.path ? 'v-list-item--active text-primary' : ''"
     >
       <template v-slot:prepend>
-        <v-icon>{{ icon }}</v-icon>
+        <v-icon :icon="icon"></v-icon>
       </template>
-      <v-list-item-title>{{ text }}</v-list-item-title>
+      <v-list-item-title v-text="text"></v-list-item-title>
     </v-list-item>
   </v-list>
 </template>
