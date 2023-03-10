@@ -60,22 +60,26 @@
         emailRules: [
           value => {
             if(value) return true
-            return 'E-mail is requred.'
+            return 'E-mail is requred'
           },
           value => {
             if(/.+@.+\..+/.test(value)) return true
-            return 'E-mail must be valid.'
+            return 'E-mail must be valid'
           },
         ],
         password: '',
         passwordRules: [
           value => {
             if(value) return true
-            return 'Password is requred.'
+            return 'Password is requred'
           },
           value => {
             if(value?.length >= 8) return true
-            return 'Password must be more than 8 characters.'
+            return 'Password must be more than 8 characters'
+          },
+          value => {
+            if(value?.length <= 32) return true
+            return 'Password must be less than 32 characters'
           },
         ],
       }
