@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-  import PageHome from '@/components/PageHome.vue'
+  import PageHome from '@/components/page/Home.vue'
 </script>

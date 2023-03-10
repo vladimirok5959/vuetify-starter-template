@@ -1,5 +1,5 @@
 <template>
-  Page Home
+  About
 </template>
 
 <script setup>

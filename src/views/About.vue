@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-  import PageAbout from '@/components/PageAbout.vue'
+  import PageAbout from '@/components/page/About.vue'
 </script>
