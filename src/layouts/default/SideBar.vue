@@ -1,7 +1,6 @@
 <template>
   <v-list id="sidebarUser">
     <v-list-item
-      prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
       title="Sandra Adams"
       subtitle="sandra@gmail.com"
     ></v-list-item>
