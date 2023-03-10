@@ -1,5 +1,7 @@
 <template>
+  <alert-box :msg="alertBoxMsg" :visible="alertBoxShow" @close="alertBoxShow=false" />
   <v-list id="sidebarUser">
+    <!-- https://skeletonreact.com/ -->
     <div v-if="!user" style="opacity:0.3;height:48px">
       <content-loader :speed="1" :animate="true" primaryColor="rgb(var(--v-theme-surface))" secondaryColor="#808080" viewBox="0 0 255 48">
         <rect x="16" y="0" rx="3" ry="3" width="223" height="24" />
@@ -37,14 +39,18 @@
 
 <script>
   import { ContentLoader } from 'vue-content-loader';
+  import AlertBox from './../../components/AlertBox.vue'
   import axios from "axios";
 
   export default {
     components: {
-      ContentLoader
+      ContentLoader,
+      AlertBox
     },
     data() {
       return {
+        alertBoxMsg: '',
+        alertBoxShow: false,
         user: null,
         links: [
           ['mdi-home', 'Home', '/'],
@@ -63,7 +69,8 @@
             this.user = response.data;
           })
           .catch((err) => {
-            alert(err)
+            this.alertBoxMsg = err.code
+            this.alertBoxShow = true
           })
       },
     },
