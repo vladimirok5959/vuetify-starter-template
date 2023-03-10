@@ -1,9 +1,12 @@
 <template>
   <v-list id="sidebarUser">
-    <v-list-item
-      title="Sandra Adams"
-      subtitle="sandra@gmail.com"
-    ></v-list-item>
+    <div v-if="!user" style="opacity:0.3;height:48px">
+      <content-loader :speed="1" :animate="true" primaryColor="rgb(var(--v-theme-surface))" secondaryColor="#808080" viewBox="0 0 255 48">
+        <rect x="16" y="0" rx="3" ry="3" width="223" height="24" />
+        <rect x="16" y="30" rx="3" ry="3" width="223" height="18" />
+      </content-loader>
+    </div>
+    <v-list-item v-if="user" :title="user.UserName" :subtitle="user.UserEmail"></v-list-item>
   </v-list>
   <v-list density="compact">
     <v-list-subheader>DASHBOARD</v-list-subheader>
@@ -33,9 +36,16 @@
 </style>
 
 <script>
+  import { ContentLoader } from 'vue-content-loader';
+  import axios from "axios";
+
   export default {
+    components: {
+      ContentLoader
+    },
     data() {
       return {
+        user: null,
         links: [
           ['mdi-home', 'Home', '/'],
           ['mdi-help-box', 'About', '/about'],
@@ -46,6 +56,19 @@
       onItemClick(href) {
         this.$router.push({ path: href })
       },
+      getUser() {
+        axios
+          .get(import.meta.env.VITE_API_BASE_URL + "/user", { dataType: 'json' })
+          .then((response) => {
+            this.user = response.data;
+          })
+          .catch((err) => {
+            alert(err)
+          })
+      },
+    },
+    mounted() {
+      this.getUser()
     },
   }
 </script>
