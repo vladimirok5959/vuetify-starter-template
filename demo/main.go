@@ -21,8 +21,13 @@ func (l ListOfStrings) Contains(s string) bool {
 }
 
 type User struct {
-	UserName  string `json:"UserName"`
-	UserEmail string `json:"UserEmail"`
+	UserName  string `json:"userName"`
+	UserEmail string `json:"userEmail"`
+}
+
+type TableRow struct {
+	Name     string `json:"name"`
+	Calories int    `json:"calories"`
 }
 
 func main() {
@@ -30,6 +35,21 @@ func main() {
 		Render(User{
 			UserName:  "Sandra Adams",
 			UserEmail: "sandra@gmail.com",
+		}, w, r)
+	}))
+
+	http.HandleFunc("/table", Headers(func(w http.ResponseWriter, r *http.Request) {
+		Render([]TableRow{
+			{"Frozen Yogurt", 159},
+			{"Ice cream sandwich", 237},
+			{"Eclair", 262},
+			{"Cupcake", 305},
+			{"Gingerbread", 356},
+			{"Jelly bean", 375},
+			{"Lollipop", 392},
+			{"Honeycomb", 408},
+			{"Donut", 452},
+			{"KitKat", 518},
 		}, w, r)
 	}))
 

@@ -8,7 +8,7 @@
         <rect x="16" y="30" rx="3" ry="3" width="223" height="18" />
       </content-loader>
     </div>
-    <v-list-item v-if="user" :title="user.UserName" :subtitle="user.UserEmail"></v-list-item>
+    <v-list-item v-if="user" :title="user.userName" :subtitle="user.userEmail"></v-list-item>
   </v-list>
   <v-list density="compact">
     <v-list-subheader>DASHBOARD</v-list-subheader>
@@ -38,7 +38,7 @@
 </style>
 
 <script>
-  import { ContentLoader } from 'vue-content-loader';
+  import { ContentLoader } from 'vue-content-loader'
   import AlertBox from './../../components/AlertBox.vue'
   import axios from "axios";
 
@@ -62,7 +62,7 @@
       onItemClick(href) {
         this.$router.push({ path: href })
       },
-      getUser() {
+      loadUser() {
         axios
           .get(import.meta.env.VITE_API_BASE_URL + "/user", { dataType: 'json' })
           .then((response) => {
@@ -85,7 +85,7 @@
       },
     },
     mounted() {
-      this.getUser()
+      this.loadUser()
     },
   }
 </script>
