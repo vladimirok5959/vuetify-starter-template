@@ -9,7 +9,7 @@
                 <span class="text-h5">Please Login</span>
               </v-card-title>
               <v-card-text>
-                <v-container>
+                <v-container class="pa-0">
                   <v-form>
                       <v-text-field name="login" label="Login*" type="text"></v-text-field>
                       <v-text-field name="password" label="Password*" type="password"></v-text-field>

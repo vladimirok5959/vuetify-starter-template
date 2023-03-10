@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="sidebarOpened">
       <side-bar />
       <template v-slot:append>
-        <div class="pa-2">
+        <div class="pa-4">
           <v-btn color="primary" to="/login" block>
             Logout
           </v-btn>
