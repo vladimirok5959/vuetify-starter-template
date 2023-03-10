@@ -4,7 +4,7 @@
       <side-bar />
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn color="primary" block>
+          <v-btn color="primary" to="/login" block>
             Logout
           </v-btn>
         </div>
