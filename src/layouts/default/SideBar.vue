@@ -69,8 +69,14 @@
             this.user = response.data;
           })
           .catch((err) => {
-            this.alertBoxMsg = err.code
-            this.alertBoxShow = true
+            if(err.response && err.response.status == 403) {
+              // Login page
+              this.$router.push({ path: '/login' })
+            } else {
+              // Show message
+              this.alertBoxMsg = err.code
+              this.alertBoxShow = true
+            }
           })
       },
     },
