@@ -1,5 +1,10 @@
 <template>
   <alert-box :msg="alertBoxMsg" :visible="alertBoxShow" @close="alertBoxShow=false" />
+  <v-breadcrumbs class="mb-6" style="background:rgb(var(--v-theme-surface))" :items="breadcrumbs">
+    <template v-slot:title="{ item }">
+      {{ item.title.toUpperCase() }}
+    </template>
+  </v-breadcrumbs>
   <!-- https://skeletonreact.com/ -->
   <div v-if="!items.length" style="background:rgb(var(--v-theme-surface))" class="pa-4">
     <div style="opacity:0.3">
@@ -47,6 +52,18 @@
       return {
         alertBoxMsg: '',
         alertBoxShow: false,
+        breadcrumbs: [
+        {
+          title: 'Dashboard',
+          disabled: false,
+          href: '/',
+        },
+        {
+          title: 'Home',
+          disabled: true,
+          href: '/',
+        },
+        ],
         items: [],
       }
     },
