@@ -53,30 +53,32 @@
       if(currentTheme == null) { currentTheme = 'light' }
       theme.global.name.value = currentTheme
     },
-    data: () => ({
-      valid: false,
-      email: '',
-      emailRules: [
-        value => {
-          if(value) return true
-          return 'E-mail is requred.'
-        },
-        value => {
-          if(/.+@.+\..+/.test(value)) return true
-          return 'E-mail must be valid.'
-        },
-      ],
-      password: '',
-      passwordRules: [
-        value => {
-          if(value) return true
-          return 'Password is requred.'
-        },
-        value => {
-          if(value?.length >= 8) return true
-          return 'Password must be more than 8 characters.'
-        },
-      ],
-    }),
+    data() {
+      return {
+        valid: false,
+        email: '',
+        emailRules: [
+          value => {
+            if(value) return true
+            return 'E-mail is requred.'
+          },
+          value => {
+            if(/.+@.+\..+/.test(value)) return true
+            return 'E-mail must be valid.'
+          },
+        ],
+        password: '',
+        passwordRules: [
+          value => {
+            if(value) return true
+            return 'Password is requred.'
+          },
+          value => {
+            if(value?.length >= 8) return true
+            return 'Password must be more than 8 characters.'
+          },
+        ],
+      }
+    },
   }
 </script>
