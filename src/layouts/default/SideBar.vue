@@ -74,7 +74,11 @@
               this.$router.push({ path: '/login' })
             } else {
               // Show message
-              this.alertBoxMsg = err.code
+              if(err.code == 'ERR_NETWORK') {
+                this.alertBoxMsg = 'No internet connection, try to refresh page'
+              } else {
+                this.alertBoxMsg = err.code
+              }
               this.alertBoxShow = true
             }
           })
