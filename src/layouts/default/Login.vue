@@ -10,9 +10,21 @@
               </v-card-title>
               <v-card-text>
                 <v-container class="pa-0">
-                  <v-form>
-                      <v-text-field name="login" label="Login*" type="text"></v-text-field>
-                      <v-text-field name="password" label="Password*" type="password"></v-text-field>
+                  <v-form v-model="valid">
+                    <v-text-field
+                      v-model="email"
+                      :rules="emailRules"
+                      label="E-mail*"
+                      type="text"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="password"
+                      :rules="passwordRules"
+                      label="Password*"
+                      type="password"
+                      required
+                    ></v-text-field>
                   </v-form>
                 </v-container>
                 <small>*indicates required field</small>
@@ -41,5 +53,30 @@
       if(currentTheme == null) { currentTheme = 'light' }
       theme.global.name.value = currentTheme
     },
+    data: () => ({
+      valid: false,
+      email: '',
+      emailRules: [
+        value => {
+          if(value) return true
+          return 'E-mail is requred.'
+        },
+        value => {
+          if(/.+@.+\..+/.test(value)) return true
+          return 'E-mail must be valid.'
+        },
+      ],
+      password: '',
+      passwordRules: [
+        value => {
+          if(value) return true
+          return 'Password is requred.'
+        },
+        value => {
+          if(value?.length >= 8) return true
+          return 'Password must be more than 8 characters.'
+        },
+      ],
+    }),
   }
 </script>
