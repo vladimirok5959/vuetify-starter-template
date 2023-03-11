@@ -4,10 +4,10 @@
       <v-row>
         <v-col cols="12" sm="8" offset-sm="2" md="6" offset-md="3">
           <v-card>
-            <v-card-title>
-              <span class="text-h5">Please Login</span>
+            <v-card-title class="pt-3">
+              <span class="text-h5">Please login</span>
             </v-card-title>
-            <v-card-text>
+            <v-card-text class="pt-0 pb-0 pl-4 pr-4">
               <v-container class="pa-0">
                 <v-form v-model="valid">
                   <v-text-field

@@ -51,11 +51,11 @@
             <v-btn color="primary" variant="outlined" class="mb-0 mr-4" v-bind="props" @click="newItem()">New Product</v-btn>
           </template>
           <v-card>
-            <v-card-title>
+            <v-card-title class="pt-3">
               <span class="text-h5">{{ formTitle }}</span>
             </v-card-title>
-            <v-card-text>
-              <v-container>
+            <v-card-text class="pt-0 pb-0 pl-4 pr-4">
+              <v-container class="pa-0">
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
@@ -75,13 +75,14 @@
         </v-dialog>
         <v-dialog v-model="dialogDelete" persistent max-width="500px">
           <v-card>
-            <v-card-title class="text-h5">Delete this product?</v-card-title>
-            <v-card-text>{{ editedItem.name }}</v-card-text>
+            <v-card-title class="pt-3">
+              <span class="text-h5">Delete product?</span>
+            </v-card-title>
+            <v-card-text class="pt-0 pb-0 pl-4 pr-4">{{ editedItem.name }}</v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancel</v-btn>
               <v-btn color="error" variant="text" @click="deleteItemConfirm">Delete</v-btn>
-              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -137,7 +138,7 @@
         return this.editedIndex === -1 ? 'New Product' : 'Edit Product'
       },
       formAction() {
-        return this.editedIndex === -1 ? 'Add' : 'Save'
+        return this.editedIndex === -1 ? 'Create' : 'Save'
       },
     },
     watch: {
