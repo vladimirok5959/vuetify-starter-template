@@ -41,21 +41,21 @@ func main() {
 
 	http.HandleFunc("/table", Headers(func(w http.ResponseWriter, r *http.Request) {
 		Render([]TableRow{
-			{1, "Frozen Yogurt", 159},
-			{2, "Ice cream sandwich", 237},
-			{3, "Eclair", 262},
+			{1, "Apple", 50},
+			{2, "Banana", 50},
+			{3, "Burger", 250},
 			{4, "Cupcake", 305},
-			{5, "Gingerbread", 356},
-			{6, "Jelly bean", 375},
-			{7, "Lollipop", 392},
-			{8, "Honeycomb", 408},
-			{9, "Donut", 452},
-			{10, "KitKat", 518},
-			{11, "Apple", 50},
-			{12, "Pear", 80},
-			{13, "Watermelon", 100},
-			{14, "Banana", 50},
-			{15, "Burger", 250},
+			{5, "Donut", 452},
+			{6, "Eclair", 262},
+			{7, "Frozen Yogurt", 159},
+			{8, "Gingerbread", 356},
+			{9, "Honeycomb", 408},
+			{10, "Ice cream sandwich", 237},
+			{11, "Jelly bean", 375},
+			{12, "KitKat", 518},
+			{13, "Lollipop", 392},
+			{14, "Pear", 80},
+			{15, "Watermelon", 100},
 		}, w, r)
 	}))
 
