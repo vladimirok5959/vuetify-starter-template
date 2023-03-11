@@ -35,7 +35,7 @@
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" persistent transition="dialog-transition" max-width="500px">
           <template v-slot:activator="{ props }">
-            <v-btn color="primary" variant="outlined" class="mb-0 mr-4" v-bind="props">New Product</v-btn>
+            <v-btn color="primary" variant="outlined" class="mb-0 mr-4" v-bind="props" @click="newItem()">New Product</v-btn>
           </template>
           <v-card>
             <v-card-title>
@@ -140,6 +140,12 @@
           this.items = response.data
         }).catch((err) => { this.processAxiosError(err) })
       },
+      newItem() {
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
       editItem(item) {
         this.editedIndex = this.items.indexOf(item)
         this.editedItem = Object.assign({}, item)
@@ -157,17 +163,9 @@
       },
       close() {
         this.dialog = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
       },
       closeDelete() {
         this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
       },
       submit() {
         if(this.editedIndex > -1) {
