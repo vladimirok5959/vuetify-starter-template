@@ -41,7 +41,7 @@ const routes = [
     meta: {
       title: 'Dashboard | Login',
     },
-    component: () => import('@/layouts/default/Login.vue'),
+    component: () => import('@/layouts/default/Blank.vue'),
     children: [
       {
         path: '',
