@@ -148,6 +148,18 @@
       dialogDelete(val) {
         val || this.closeDelete()
       },
+      search(val) {
+        if(val == '') {
+          this.$router.push({
+            path: this.$router.currentRoute.value.path,
+          })
+        } else {
+          this.$router.push({
+            path: this.$router.currentRoute.value.path,
+            query: { search: val }
+          })
+        }
+      },
     },
     methods: {
       loadItems() {
@@ -194,6 +206,7 @@
       },
     },
     mounted() {
+      this.search = this.$router.currentRoute.value.query.search
       this.loadItems()
     },
   }
