@@ -26,13 +26,26 @@
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
     :items="items"
+    :search="search"
     item-value="name"
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>Calories of products</v-toolbar-title>
+        <v-toolbar-title>Product calories</v-toolbar-title>
         <v-spacer></v-spacer>
+        <v-text-field
+          density="compact"
+          variant="solo"
+          v-model="search"
+          append-inner-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+          class="d-none d-sm-block mr-4"
+          max-width="100px"
+          style="max-width:300px"
+        ></v-text-field>
         <v-dialog v-model="dialog" persistent transition="dialog-transition" max-width="500px">
           <template v-slot:activator="{ props }">
             <v-btn color="primary" variant="outlined" class="mb-0 mr-4" v-bind="props" @click="newItem()">New Product</v-btn>
@@ -110,6 +123,7 @@
         },
         dialogDelete: false,
         itemsPerPage: 10,
+        search: '',
         headers: [
           { title: 'Name', align: 'start', key: 'name' },
           { title: 'Calories', align: 'end', key: 'calories' },
