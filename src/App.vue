@@ -10,7 +10,8 @@
 
 <style>
   .v-data-table-footer {
-    padding: 16px 16px;
+    background: rgb(var(--v-theme-on-surface-variant));
+    padding: 16px 16px !important;
   }
 </style>
 
