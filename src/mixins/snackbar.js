@@ -13,6 +13,19 @@ export default {
         parent = parent.$parent
       }
       parent.showNoConnectionMsg()
-    }
+    },
+    processAxiosError: function(err) {
+      if(err.response && err.response.status == 403) {
+        // Login page
+        this.$router.push({ path: '/login' })
+      } else {
+        // Show message
+        if(err.code == 'ERR_NETWORK') {
+          this.showNoConnectionMsg()
+        } else {
+          this.showMsg(err.code)
+        }
+      }
+    },
   }
 }
