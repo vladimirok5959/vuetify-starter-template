@@ -1,10 +1,4 @@
 <template>
-  <v-snackbar v-model="snackBarShow">
-    {{ snackBarMsg }}
-    <template v-slot:actions>
-      <v-btn variant="text" @click="snackBarShow = false">Close</v-btn>
-    </template>
-  </v-snackbar>
   <v-list id="sidebarUser">
     <!-- https://skeletonreact.com/ -->
     <div v-if="!user" style="opacity:0.3;height:48px">
@@ -52,8 +46,6 @@
     },
     data() {
       return {
-        snackBarMsg: '',
-        snackBarShow: false,
         user: null,
         links: [
           ['mdi-home', 'Home', '/'],
@@ -78,11 +70,10 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.snackBarMsg = import.meta.env.VITE_APP_ERR_NETWORK
+                this.$parent.$parent.$parent.$parent.$parent.showNoConnectionMsg()
               } else {
-                this.snackBarMsg = err.code
+                this.$parent.$parent.$parent.$parent.$parent.showMsg(err.code)
               }
-              this.snackBarShow = true
             }
           })
       },

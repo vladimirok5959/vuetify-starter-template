@@ -1,4 +1,10 @@
 <template>
+  <v-snackbar v-model="snackBarShow">
+    {{ snackBarMsg }}
+    <template v-slot:actions>
+      <v-btn variant="text" @click="snackBarShow = false">Close</v-btn>
+    </template>
+  </v-snackbar>
   <router-view />
 </template>
 
@@ -12,6 +18,22 @@
           document.title = to.meta.title || import.meta.env.VITE_APP_TITLE
         }
       },
-    }
+    },
+    data() {
+      return {
+        snackBarMsg: '',
+        snackBarShow: false,
+      }
+    },
+    methods: {
+      showMsg(message) {
+        this.snackBarMsg = message
+        this.snackBarShow = true
+      },
+      showNoConnectionMsg() {
+        this.snackBarMsg = import.meta.env.VITE_APP_ERR_NETWORK
+        this.snackBarShow = true
+      },
+    },
   };
 </script>
