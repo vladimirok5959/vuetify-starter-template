@@ -84,7 +84,7 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.snackBarMsg = 'No internet connection, try to refresh page'
+                this.snackBarMsg = import.meta.env.VITE_APP_ERR_NETWORK
               } else {
                 this.snackBarMsg = err.code
               }
