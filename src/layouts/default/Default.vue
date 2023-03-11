@@ -12,7 +12,7 @@
     </v-navigation-drawer>
     <v-app-bar>
       <v-app-bar-nav-icon @click="toggleSidebar"></v-app-bar-nav-icon>
-      <v-toolbar-title>Vuetify 3</v-toolbar-title>
+      <v-toolbar-title>{{ title() }}</v-toolbar-title>
       <v-btn
         id="toggleTheme"
         @click="toggleSwitch(); toggleTheme();"
@@ -58,6 +58,9 @@
       }
     },
     methods: {
+      title() {
+        return import.meta.env.VITE_APP_TITLE
+      },
       sidebarOpenedValue() {
         const isOpened = localStorage.getItem("sidebar")
         return isOpened != null && isOpened == 'true'

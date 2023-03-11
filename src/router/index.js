@@ -4,6 +4,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    meta: {
+      title: 'Dashboard | Home',
+    },
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
@@ -18,6 +21,9 @@ const routes = [
   },
   {
     path: '/about',
+    meta: {
+      title: 'Dashboard | About',
+    },
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
@@ -32,6 +38,9 @@ const routes = [
   },
   {
     path: '/login',
+    meta: {
+      title: 'Dashboard | Login',
+    },
     component: () => import('@/layouts/default/Login.vue'),
     children: [
       {
