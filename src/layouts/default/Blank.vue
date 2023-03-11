@@ -1,17 +1,15 @@
 <template>
   <v-app id="inspire">
-    <default-view />
+    <v-main>
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 
 <script>
   import { useTheme } from 'vuetify'
-  import DefaultView from './View.vue'
 
   export default {
-    components: {
-      DefaultView,
-    },
     setup() {
       const theme = useTheme()
 

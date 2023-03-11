@@ -3,7 +3,7 @@
     <v-responsive class="d-flex align-center fill-height">
       <v-row>
         <v-col cols="12" sm="8" offset-sm="2" md="6" offset-md="3">
-          <v-card>
+          <v-card class="pa-4">
             <v-card-title>
               <span class="text-h5">Please Login</span>
             </v-card-title>
