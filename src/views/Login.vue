@@ -2,7 +2,7 @@
   <v-container class="fill-height">
     <v-responsive class="d-flex align-center fill-height">
       <v-row>
-        <v-col cols="12" sm="8" offset-sm="2" md="6" offset-md="3">
+        <v-col cols="12" sm="6" offset-sm="3" md="6" offset-md="3">
           <v-card>
             <v-card-title class="pt-3">
               <span class="text-h5">Please login</span>
@@ -10,23 +10,30 @@
             <v-card-text class="pt-0 pb-0 pl-4 pr-4">
               <v-container class="pa-0">
                 <v-form v-model="valid">
-                  <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail*"
-                    type="text"
-                    required
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="Password*"
-                    type="password"
-                    required
-                  ></v-text-field>
+                  <v-container class="pa-0">
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          v-model="email"
+                          :rules="emailRules"
+                          label="E-mail*"
+                          type="text"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          v-model="password"
+                          :rules="passwordRules"
+                          label="Password*"
+                          type="password"
+                          required
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                  </v-container>
                 </v-form>
               </v-container>
-              <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
