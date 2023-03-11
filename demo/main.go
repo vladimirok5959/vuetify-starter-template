@@ -26,6 +26,7 @@ type User struct {
 }
 
 type TableRow struct {
+	ID       int    `json:"id"`
 	Name     string `json:"name"`
 	Calories int    `json:"calories"`
 }
@@ -40,16 +41,21 @@ func main() {
 
 	http.HandleFunc("/table", Headers(func(w http.ResponseWriter, r *http.Request) {
 		Render([]TableRow{
-			{"Frozen Yogurt", 159},
-			{"Ice cream sandwich", 237},
-			{"Eclair", 262},
-			{"Cupcake", 305},
-			{"Gingerbread", 356},
-			{"Jelly bean", 375},
-			{"Lollipop", 392},
-			{"Honeycomb", 408},
-			{"Donut", 452},
-			{"KitKat", 518},
+			{1, "Frozen Yogurt", 159},
+			{2, "Ice cream sandwich", 237},
+			{3, "Eclair", 262},
+			{4, "Cupcake", 305},
+			{5, "Gingerbread", 356},
+			{6, "Jelly bean", 375},
+			{7, "Lollipop", 392},
+			{8, "Honeycomb", 408},
+			{9, "Donut", 452},
+			{10, "KitKat", 518},
+			{11, "Apple", 50},
+			{12, "Pear", 80},
+			{13, "Watermelon", 100},
+			{14, "Banana", 50},
+			{15, "Burger", 250},
 		}, w, r)
 	}))
 
