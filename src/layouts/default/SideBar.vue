@@ -37,6 +37,7 @@
 </style>
 
 <script>
+  import Mixins from './../../components/mixins.js'
   import { ContentLoader } from 'vue-content-loader'
   import axios from "axios";
 
@@ -44,6 +45,7 @@
     components: {
       ContentLoader
     },
+    mixins: [Mixins],
     data() {
       return {
         user: null,
@@ -70,9 +72,9 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.$parent.$parent.$parent.$parent.$parent.showNoConnectionMsg()
+                this.showNoConnectionMsg()
               } else {
-                this.$parent.$parent.$parent.$parent.$parent.showMsg(err.code)
+                this.showMsg(err.code)
               }
             }
           })
