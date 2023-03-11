@@ -28,7 +28,57 @@
     :items="items"
     item-value="name"
     class="elevation-1"
-  ></v-data-table>
+  >
+    <template v-slot:top>
+      <v-toolbar flat>
+        <v-toolbar-title>Calories of products</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-dialog v-model="dialog" persistent transition="dialog-transition" max-width="500px">
+          <template v-slot:activator="{ props }">
+            <v-btn color="primary" variant="outlined" class="mb-0 mr-4" v-bind="props">New Product</v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">{{ formTitle }}</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue-darken-1" variant="text" @click="close">Cancel</v-btn>
+              <v-btn color="blue-darken-1" variant="text" @click="submit">{{ formAction }}</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="dialogDelete" persistent max-width="500px">
+          <v-card>
+            <v-card-title class="text-h5">Delete this product?</v-card-title>
+            <v-card-text>{{ editedItem.name }}</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue-darken-1" variant="text" @click="closeDelete">Cancel</v-btn>
+              <v-btn color="error" variant="text" @click="deleteItemConfirm">Delete</v-btn>
+              <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-toolbar>
+    </template>
+    <template v-slot:item.actions="{ item }">
+      <v-icon size="small" class="me-2" @click="editItem(item.raw)">mdi-pencil</v-icon>
+      <v-icon size="small" @click="deleteItem(item.raw)">mdi-delete</v-icon>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -45,30 +95,89 @@
     data() {
       return {
         breadcrumbs: [
-        {
-          title: 'Dashboard',
-          disabled: false,
-          href: '/',
-        },
-        {
-          title: 'Home',
-          disabled: true,
-          href: '/',
-        },
+          { title: 'Dashboard', disabled: false, href: '/' },
+          { title: 'Home', disabled: true, href: '/' },
         ],
+        dialog: false,
+        editedIndex: -1,
+        editedItem: {
+          name: '',
+          calories: 0,
+        },
+        defaultItem: {
+          name: '',
+          calories: 0,
+        },
+        dialogDelete: false,
         itemsPerPage: 10,
         headers: [
           { title: 'Name', align: 'start', key: 'name' },
           { title: 'Calories', align: 'end', key: 'calories' },
+          { title: 'Actions', align: 'end', key: 'actions', sortable: false },
         ],
         items: [],
       }
+    },
+    computed: {
+      formTitle() {
+        return this.editedIndex === -1 ? 'New Product' : 'Edit Product'
+      },
+      formAction() {
+        return this.editedIndex === -1 ? 'Add' : 'Save'
+      },
+    },
+    watch: {
+      dialog(val) {
+        val || this.close()
+      },
+      dialogDelete(val) {
+        val || this.closeDelete()
+      },
     },
     methods: {
       loadItems() {
         this.apiGet("/table").then((response) => {
           this.items = response.data
         }).catch((err) => { this.processAxiosError(err) })
+      },
+      editItem(item) {
+        this.editedIndex = this.items.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialog = true
+      },
+      deleteItem(item) {
+        this.editedIndex = this.items.indexOf(item)
+        this.editedItem = Object.assign({}, item)
+        this.dialogDelete = true
+      },
+      deleteItemConfirm() {
+        // Delete
+        console.log('Delete', this.editedItem)
+        this.closeDelete()
+      },
+      close() {
+        this.dialog = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+      closeDelete() {
+        this.dialogDelete = false
+        this.$nextTick(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        })
+      },
+      submit() {
+        if(this.editedIndex > -1) {
+          // Update
+          console.log('Update', this.editedItem)
+        } else {
+          // Create
+          console.log('Create', this.editedItem)
+        }
+        this.close()
       },
     },
     mounted() {

@@ -8,6 +8,12 @@
   <router-view />
 </template>
 
+<style>
+  .v-data-table-footer {
+    padding: 16px 16px;
+  }
+</style>
+
 <script>
   export default {
     name: 'App',
