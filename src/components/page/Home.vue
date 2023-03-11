@@ -1,5 +1,10 @@
 <template>
-  <alert-box :msg="alertBoxMsg" :visible="alertBoxShow" @close="alertBoxShow=false" />
+  <v-snackbar v-model="snackBarShow">
+    {{ snackBarMsg }}
+    <template v-slot:actions>
+      <v-btn variant="text" @click="snackBarShow = false">Close</v-btn>
+    </template>
+  </v-snackbar>
   <v-breadcrumbs class="mb-6" style="background:rgb(var(--v-theme-surface))" :items="breadcrumbs">
     <template v-slot:title="{ item }">
       {{ item.title.toUpperCase() }}
@@ -40,18 +45,16 @@
 
 <script>
   import { ContentLoader } from 'vue-content-loader'
-  import AlertBox from './../../components/AlertBox.vue'
   import axios from "axios";
 
   export default {
     components: {
-      ContentLoader,
-      AlertBox
+      ContentLoader
     },
     data () {
       return {
-        alertBoxMsg: '',
-        alertBoxShow: false,
+        snackBarMsg: '',
+        snackBarShow: false,
         breadcrumbs: [
         {
           title: 'Dashboard',
@@ -81,11 +84,11 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.alertBoxMsg = 'No internet connection, try to refresh page'
+                this.snackBarMsg = 'No internet connection, try to refresh page'
               } else {
-                this.alertBoxMsg = err.code
+                this.snackBarMsg = err.code
               }
-              this.alertBoxShow = true
+              this.snackBarShow = true
             }
           })
       },

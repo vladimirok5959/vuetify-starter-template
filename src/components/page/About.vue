@@ -13,8 +13,6 @@
     },
     data () {
       return {
-        alertBoxMsg: '',
-        alertBoxShow: false,
         breadcrumbs: [
         {
           title: 'Dashboard',

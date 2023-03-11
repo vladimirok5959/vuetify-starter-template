@@ -1,5 +1,10 @@
 <template>
-  <alert-box :msg="alertBoxMsg" :visible="alertBoxShow" @close="alertBoxShow=false" />
+  <v-snackbar v-model="snackBarShow">
+    {{ snackBarMsg }}
+    <template v-slot:actions>
+      <v-btn variant="text" @click="snackBarShow = false">Close</v-btn>
+    </template>
+  </v-snackbar>
   <v-list id="sidebarUser">
     <!-- https://skeletonreact.com/ -->
     <div v-if="!user" style="opacity:0.3;height:48px">
@@ -39,18 +44,16 @@
 
 <script>
   import { ContentLoader } from 'vue-content-loader'
-  import AlertBox from './../../components/AlertBox.vue'
   import axios from "axios";
 
   export default {
     components: {
-      ContentLoader,
-      AlertBox
+      ContentLoader
     },
     data() {
       return {
-        alertBoxMsg: '',
-        alertBoxShow: false,
+        snackBarMsg: '',
+        snackBarShow: false,
         user: null,
         links: [
           ['mdi-home', 'Home', '/'],
@@ -75,11 +78,11 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.alertBoxMsg = 'No internet connection, try to refresh page'
+                this.snackBarMsg = 'No internet connection, try to refresh page'
               } else {
-                this.alertBoxMsg = err.code
+                this.snackBarMsg = err.code
               }
-              this.alertBoxShow = true
+              this.snackBarShow = true
             }
           })
       },
