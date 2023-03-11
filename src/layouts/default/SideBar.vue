@@ -37,16 +37,15 @@
 </style>
 
 <script>
-  import MixinSnackBar from './../../mixins/snackbar.js'
+  import MixinAjax from './../../mixins/ajax.js'
   import { ContentLoader } from 'vue-content-loader'
-  import axios from "axios";
 
   export default {
     components: {
       ContentLoader
     },
     mixins: [
-      MixinSnackBar
+      MixinAjax
     ],
     data() {
       return {
@@ -62,14 +61,9 @@
         this.$router.push({ path: href })
       },
       loadUser() {
-        axios
-          .get(import.meta.env.VITE_API_BASE_URL + "/user", { dataType: 'json' })
-          .then((response) => {
-            this.user = response.data;
-          })
-          .catch((err) => {
-            this.processAxiosError(err)
-          })
+        this.apiGet("/user").then((response) => {
+          this.user = response.data;
+        }).catch((err) => { this.processAxiosError(err) })
       },
     },
     mounted() {

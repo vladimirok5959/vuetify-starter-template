@@ -38,16 +38,15 @@
 </template>
 
 <script>
-  import MixinSnackBar from './../../mixins/snackbar.js'
+  import MixinAjax from './../../mixins/ajax.js'
   import { ContentLoader } from 'vue-content-loader'
-  import axios from "axios";
 
   export default {
     components: {
       ContentLoader
     },
     mixins: [
-      MixinSnackBar
+      MixinAjax
     ],
     data() {
       return {
@@ -68,14 +67,9 @@
     },
     methods: {
       loadItems() {
-        axios
-          .get(import.meta.env.VITE_API_BASE_URL + "/table", { dataType: 'json' })
-          .then((response) => {
-            this.items = response.data;
-          })
-          .catch((err) => {
-            this.processAxiosError(err)
-          })
+        this.apiGet("/table").then((response) => {
+          this.items = response.data
+        }).catch((err) => { this.processAxiosError(err) })
       },
     },
     mounted() {

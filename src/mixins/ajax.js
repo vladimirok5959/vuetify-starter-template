@@ -1,5 +1,13 @@
+import axios from "axios";
+
 export default {
   methods: {
+    apiGet: function(path) {
+      return axios.get(
+        import.meta.env.VITE_API_BASE_URL + path,
+        { dataType: 'json' }
+      )
+    },
     showMsg: function(message) {
       var parent = this.$parent
       while(parent.showMsg == undefined) {
@@ -16,10 +24,8 @@ export default {
     },
     processAxiosError: function(err) {
       if(err.response && err.response.status == 403) {
-        // Login page
         this.$router.push({ path: '/login' })
       } else {
-        // Show message
         if(err.code == 'ERR_NETWORK') {
           this.showNoConnectionMsg()
         } else {
