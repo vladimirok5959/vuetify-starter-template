@@ -1,10 +1,4 @@
 <template>
-  <v-snackbar v-model="snackBarShow">
-    {{ snackBarMsg }}
-    <template v-slot:actions>
-      <v-btn variant="text" @click="snackBarShow = false">Close</v-btn>
-    </template>
-  </v-snackbar>
   <v-breadcrumbs class="mb-6" style="background:rgb(var(--v-theme-surface))" :items="breadcrumbs">
     <template v-slot:title="{ item }">
       {{ item.title.toUpperCase() }}
@@ -53,8 +47,6 @@
     },
     data () {
       return {
-        snackBarMsg: '',
-        snackBarShow: false,
         breadcrumbs: [
         {
           title: 'Dashboard',
@@ -84,9 +76,9 @@
             } else {
               // Show message
               if(err.code == 'ERR_NETWORK') {
-                this.snackBarMsg = import.meta.env.VITE_APP_ERR_NETWORK
+                this.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.showNoConnectionMsg()
               } else {
-                this.snackBarMsg = err.code
+                this.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.$parent.showMsg(err.code)
               }
               this.snackBarShow = true
             }
