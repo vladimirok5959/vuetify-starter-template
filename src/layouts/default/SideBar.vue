@@ -37,7 +37,7 @@
 </style>
 
 <script>
-  import Mixins from './../../components/mixins.js'
+  import MixinSnackBar from './../../mixins/snackbar.js'
   import { ContentLoader } from 'vue-content-loader'
   import axios from "axios";
 
@@ -45,7 +45,9 @@
     components: {
       ContentLoader
     },
-    mixins: [Mixins],
+    mixins: [
+      MixinSnackBar
+    ],
     data() {
       return {
         user: null,
@@ -66,6 +68,7 @@
             this.user = response.data;
           })
           .catch((err) => {
+            // this.processAxiosError(err)
             if(err.response && err.response.status == 403) {
               // Login page
               this.$router.push({ path: '/login' })

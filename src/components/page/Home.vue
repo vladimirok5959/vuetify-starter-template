@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import Mixins from './../../components/mixins.js'
+  import MixinSnackBar from './../../mixins/snackbar.js'
   import { ContentLoader } from 'vue-content-loader'
   import axios from "axios";
 
@@ -46,7 +46,9 @@
     components: {
       ContentLoader
     },
-    mixins: [Mixins],
+    mixins: [
+      MixinSnackBar
+    ],
     data() {
       return {
         breadcrumbs: [
