@@ -11,6 +11,9 @@ import 'vuetify/styles'
 // Composables
 import { createVuetify } from 'vuetify'
 
+// https://vuetifyjs.com/en/labs/introduction/#vuetify-labs
+import { VDataTable } from 'vuetify/labs/VDataTable'
+
 const light = {
   dark: false,
   colors: {
@@ -34,5 +37,14 @@ export default createVuetify({
     themes: {
       light,
     }
+  },
+  components: {
+    VDataTable,
+  },
+  defaults: {
+    VDataTable: {
+      fixedHeader: true,
+      noDataText: 'Results not found',
+    },
   },
 })

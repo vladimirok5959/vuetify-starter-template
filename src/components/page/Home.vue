@@ -21,20 +21,14 @@
       </content-loader>
     </div>
   </div>
-  <v-table v-if="items.length">
-    <thead>
-      <tr>
-        <th class="text-left">Name</th>
-        <th class="text-left">Calories</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in items" :key="item.name">
-        <td>{{ item.name }}</td>
-        <td>{{ item.calories }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+  <v-data-table
+    v-if="items.length"
+    v-model:items-per-page="itemsPerPage"
+    :headers="headers"
+    :items="items"
+    item-value="name"
+    class="elevation-1"
+  ></v-data-table>
 </template>
 
 <script>
@@ -61,6 +55,11 @@
           disabled: true,
           href: '/',
         },
+        ],
+        itemsPerPage: 10,
+        headers: [
+          { title: 'Name', align: 'start', key: 'name' },
+          { title: 'Calories', align: 'end', key: 'calories' },
         ],
         items: [],
       }
